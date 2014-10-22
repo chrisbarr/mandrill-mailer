@@ -1,5 +1,5 @@
 {
-	"name": "chrisbarr/MandrillMailer",
+	"name": "chrisbarr/mandrill-mailer",
 	"type": "library",
 	"description": "SwiftMailer-like interface for sending emails using the Mandrill Messages API",
 	"keywords": [],
