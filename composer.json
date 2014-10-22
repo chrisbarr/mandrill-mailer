@@ -2,7 +2,7 @@
 	"name": "chrisbarr/mandrill-mailer",
 	"type": "library",
 	"description": "SwiftMailer-like interface for sending emails using the Mandrill Messages API",
-	"keywords": [],
+	"keywords": ["mailer", "Mandrill"],
 	"homepage": "https://github.com/chrisbarr/MandrillMailer",
 	"license": "MIT",
 	"authors": [
