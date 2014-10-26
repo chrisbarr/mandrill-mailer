@@ -11,15 +11,33 @@ class Mailer {
 	/** @var GuzzleHttp\Client */
 	private $guzzle;
 
+	/** @var string */
+	private $baseUrl = 'https://mandrillapp.com/api/1.0/';
+
 	/**
 	 * @param string $apiKey Your Mandrill API Key
 	 */
 	public function __construct($apiKey) {
 		$this->apiKey = $apiKey;
+	}
 
-		$this->guzzle = new GuzzleHttp\Client(array(
-			'base_url' => 'https://mandrillapp.com/api/1.0/'
-		));
+	/**
+	 * @return GuzzleHttp\Client
+	 */
+	public function getGuzzleClient() {
+		if(!$this->guzzle) {
+			$this->guzzle = new GuzzleHttp\Client(array(
+				'base_url' => $this->baseUrl
+			));
+		}
+		return $this->guzzle;
+	}
+
+	/**
+	 * @param GuzzleHttp\Client $guzzle
+	 */
+	public function setGuzzleClient(GuzzleHttp\Client $guzzle) {
+		$this->guzzle = $guzzle;
 	}
 
 	/**
@@ -33,7 +51,7 @@ class Mailer {
 		$endpoint = 'messages/send.json';
 
 		/** @var \GuzzleHttp\Message\ResponseInterface $response */
-		$response = $this->guzzle->post($endpoint, array(
+		$response = $this->getGuzzleClient()->post($endpoint, array(
 			'json' => $this->getMessageArray($message)
 		));
 
