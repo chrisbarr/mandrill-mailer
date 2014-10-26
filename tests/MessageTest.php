@@ -21,6 +21,40 @@ class MessageTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($expected, $message->getRecipients());
 	}
 
+	public function testTo_Many() {
+		$message = new Message();
+		$message->setTo('user1@example.com');
+		$message->setTo('user2@example.com', 'User Two');
+		$message->setTo(array('user3@example.com'));
+		$message->setTo(array('user4@example.com' => 'User Four'));
+
+		$this->assertEquals(4, count($message->getRecipients()));
+
+		$expected = array(
+			array(
+				'email' => 'user1@example.com',
+				'name' => '',
+				'type' => 'to'
+			),
+			array(
+				'email' => 'user2@example.com',
+				'name' => 'User Two',
+				'type' => 'to'
+			),
+			array(
+				'email' => 'user3@example.com',
+				'name' => '',
+				'type' => 'to'
+			),
+			array(
+				'email' => 'user4@example.com',
+				'name' => 'User Four',
+				'type' => 'to'
+			)
+		);
+		$this->assertEquals($expected, $message->getRecipients());
+	}
+
 	public function testCC() {
 		$message = new Message();
 		$message->setCC('chris.barr@ntlworld.com');
@@ -47,6 +81,58 @@ class MessageTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'email' => 'chris.barr@ntlworld.com',
 				'name' => '',
+				'type' => 'bcc'
+			)
+		);
+		$this->assertEquals($expected, $message->getRecipients());
+	}
+
+	public function testRecipient() {
+		$message = new Message();
+		$message->setRecipient(array(
+			'user1@example.com',
+			'user2@example.com' => 'Test User'
+		));
+
+		$this->assertEquals(2, count($message->getRecipients()));
+
+		$expected = array(
+			array(
+				'email' => 'user1@example.com',
+				'name' => '',
+				'type' => 'to'
+			),
+			array(
+				'email' => 'user2@example.com',
+				'name' => 'Test User',
+				'type' => 'to'
+			)
+		);
+		$this->assertEquals($expected, $message->getRecipients());
+	}
+
+	public function testRecipients() {
+		$message = new Message();
+		$message->setTo('to@example.com', 'Test User');
+		$message->setCC('cc@example.com', 'Test User');
+		$message->setBCC('bcc@example.com', 'Test User');
+
+		$this->assertEquals(3, count($message->getRecipients()));
+
+		$expected = array(
+			array(
+				'email' => 'to@example.com',
+				'name' => 'Test User',
+				'type' => 'to'
+			),
+			array(
+				'email' => 'cc@example.com',
+				'name' => 'Test User',
+				'type' => 'cc'
+			),
+			array(
+				'email' => 'bcc@example.com',
+				'name' => 'Test User',
 				'type' => 'bcc'
 			)
 		);
