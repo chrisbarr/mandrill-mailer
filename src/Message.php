@@ -54,10 +54,10 @@ class Message {
 		if(is_array($to)) {
 			foreach($to as $k => $v) {
 				if(is_numeric($k)) {
-					$this->setTo($v, '', $type);
+					$this->setRecipient($v, '', $type);
 				}
 				else {
-					$this->setTo($k, $v, $type);
+					$this->setRecipient($k, $v, $type);
 				}
 			}
 			return;
