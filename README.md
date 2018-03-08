@@ -5,7 +5,7 @@ MandrillMailer
 
 SwiftMailer-like interface for sending emails using the Mandrill Messages API
 
-##Basic Usage
+## Basic Usage
 Include it using [composer](https://getcomposer.org/):
 ```
 $ composer require chrisbarr/mandrill-mailer
@@ -35,12 +35,12 @@ $message->setHtml('<p>Html goes here</p>');
 $mailer->send($message);
 ```
 
-###See Also
+### See Also
 Read more about the Mandrill Messages API here: https://mandrillapp.com/api/docs/messages.JSON.html
 
 Use the official Mandrill PHP library here: https://mandrillapp.com/api/docs/index.php.html
 
-###Reasons for developing
+### Reasons for developing
 * I wanted to use something with a nicer interface than this: https://mandrillapp.com/api/docs/messages.php.html#method-send
 * SwiftMailer is excellent at sending emails using SMTP, but I couldn't find an easy way to send messages using an API
 * I wanted to use [Travis CI](https://travis-ci.org/) and be listed on [Packagist](https://packagist.org/) :)
